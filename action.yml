@@ -1,5 +1,8 @@
 name: 'GraphQL Diff'
-description: 'Posts a nice summary of the changes you made to your GraphQL schema in your Pull Request.'
+description: 'A neat summary of the changes you made to your GraphQL schema.'
+branding: 
+  icon: 'columns'
+  color: 'purple'
 inputs:
   token:
     description: 'GitHub token to post the comment'

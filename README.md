@@ -1,12 +1,18 @@
 # gql-diff-action
 
-Posts a nice summary of the changes you made to your GraphQL schema in your Pull Request.
+A neat summary of the changes you made to your GraphQL schema:
+
+![screenshot](./screenshot.jpg)
+
+Supports generated schemas. See [Example Usage](#example-usage).
 
 ## Inputs
 
 ### `token`
 
-A GitHub token used to post a comment to your PR
+A GitHub token used to post a comment to your PR.
+
+``${{ secrets.GITHUB_TOKEN }}`` works here.
 
 ### `old-schema`
 
@@ -19,7 +25,7 @@ The schema after the change. This can be a GraphQL SDL file or an endpoint URL.
 ## Example usage
 
 ```yaml
-uses: agu-z/gql-diff-action@v0.3
+uses: agu-z/gql-diff-action@v1
 with:
   token: '${{ secrets.GITHUB_TOKEN }}'
   old-schema: '~/old-schema.gql'
@@ -75,7 +81,7 @@ jobs:
 
           kill $SERVER_PID  # Stop server
           
-      - uses: agu-z/gql-diff-action@v0.3
+      - uses: agu-z/gql-diff-action@v1
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           old-schema: '~/old-schema.gql'
@@ -83,8 +89,10 @@ jobs:
 
 ```
 
---
+__
 
-Agustin Zubiaga 2020
+This action uses [`graphql-schema-diff`](https://github.com/fabsrc/graphql-schema-diff). Thanks [fabsrc](https://github.com/fabsrc)!
 
-MIT licensed.
+Agus Zubiaga 2020
+
+MIT licensed
