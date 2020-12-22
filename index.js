@@ -36,10 +36,17 @@ ${breaking}
 ${dangerous}
         `
         const kit = github.getOctokit(core.getInput("token"));
+        core.debug(`Comment params: ${
+            JSON.stringify({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                issue_number: github.context.payload.pull_request.number,
+            }, null, 2)
+        }`)
 
         return kit.issues.createComment({
-            owner: github.context.payload.repository.owner.name,
-            repo: github.context.payload.repository.name,
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
             issue_number: github.context.payload.pull_request.number,
             body: comment
         });
