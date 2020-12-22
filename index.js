@@ -19,11 +19,13 @@ getDiff(oldSchema, newSchema).then(async result => {
     const {repo:{owner, repo}, payload: {pull_request: {number}}} = github.context;
     const kit = github.getOctokit(core.getInput("token"));
 
-    const comments = await kit.issues.listComments({
+    const {data: comments} = await kit.issues.listComments({
         owner,
         repo,
         issue_number: number
     });
+    
+    core.info(JSON.stringify(comments, null, 2))
 
     const existing = comments.find(comment => comment.body.startsWith(header));
     
@@ -41,9 +43,15 @@ ${result.dangerousChanges.map(x => " - " + x.description).join("\n")}
         const body = `
 ${header}
 
+<details>
+<summary>
+View schema diff
+</summary>
+
 \`\`\`diff
 ${result.diffNoColor.split("\n").slice(2).join("\n")}
 \`\`\`
+</details>
 
 ${breaking}
 ${dangerous}
