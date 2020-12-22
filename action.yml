@@ -1,7 +1,7 @@
 name: 'GraphQL Diff'
 description: 'A neat summary of the changes you made to your GraphQL schema.'
 branding: 
-  icon: 'columns'
+  icon: 'book-open'
   color: 'purple'
 inputs:
   token:
