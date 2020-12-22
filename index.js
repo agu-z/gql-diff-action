@@ -3,6 +3,8 @@ const github = require("@actions/github");
 const {getDiff} = require("graphql-schema-diff");
 const path = require("path");
 
+const header = "## 🔎 GraphQL Diff"
+
 function resolveHome(filepath) {
     if (filepath[0] === '~') {
         return path.join(process.env.HOME, filepath.slice(1));
@@ -13,7 +15,18 @@ function resolveHome(filepath) {
 const oldSchema = resolveHome(core.getInput("old-schema"));
 const newSchema = resolveHome(core.getInput("new-schema"));
 
-getDiff(oldSchema, newSchema).then(result => {
+getDiff(oldSchema, newSchema).then(async result => {
+    const {repo:{owner, repo}, payload: {pull_request: {number}}} = github.context;
+    const kit = github.getOctokit(core.getInput("token"));
+
+    const comments = await kit.issues.listComments({
+        owner,
+        repo,
+        issue_number: number
+    });
+
+    const existing = comments.find(comment => comment.body.startsWith(header));
+    
     if (result) {
         const breaking = result.breakingChanges.length === 0 ? "" : `
 ### 🚨 Breaking Changes 
@@ -25,33 +38,46 @@ ${result.breakingChanges.map(x => " - " + x.description).join("\n")}
 ${result.dangerousChanges.map(x => " - " + x.description).join("\n")}
         `
 
-        const comment = `
-## GraphQL Diff
+        const body = `
+${header}
 
 \`\`\`diff
-${result.diffNoColor}
+${result.diffNoColor.split("\n").slice(2).join("\n")}
 \`\`\`
 
 ${breaking}
 ${dangerous}
         `
-        const kit = github.getOctokit(core.getInput("token"));
-        core.debug(`Comment params: ${
-            JSON.stringify({
-                owner: github.context.repo.owner,
-                repo: github.context.repo.repo,
-                issue_number: github.context.payload.pull_request.number,
-            }, null, 2)
-        }`)
 
-        return kit.issues.createComment({
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            issue_number: github.context.payload.pull_request.number,
-            body: comment
-        });
+        if (existing) {
+            await kit.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+            });
+            
+        } else {
+            await kit.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body,
+            });
+        }
     } else {
-        core.info("No schema changes");
+        core.info("No schema changes.");
+        
+        if (existing) {
+            await kit.issues.deleteComment({
+                owner,
+                repo,
+                comment_id: existing.id
+            });
+            
+            
+            core.info("Deleted comment.")
+        }
     }
 }).catch((err) => core.setFailed(err.message));
     
