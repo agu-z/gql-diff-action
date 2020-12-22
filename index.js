@@ -3,7 +3,7 @@ const github = require("@actions/github");
 const {getDiff} = require("graphql-schema-diff");
 const path = require("path");
 
-const header = "## 🔎 GraphQL Diff"
+const header = "## 🗞 GraphQL Summary"
 
 function resolveHome(filepath) {
     if (filepath[0] === '~') {
@@ -40,12 +40,11 @@ ${result.breakingChanges.map(x => " - " + x.description).join("\n")}
 ${result.dangerousChanges.map(x => " - " + x.description).join("\n")}
         `
 
-        const body = `
-${header}
+        const body = `${header}
 
 <details>
 <summary>
-View schema diff
+View schema changes
 </summary>
 
 \`\`\`diff
