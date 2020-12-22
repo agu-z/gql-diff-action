@@ -2,9 +2,9 @@
 
 A neat summary of the changes you made to your GraphQL schema:
 
-![screenshot](./screenshot.jpg)
+![summary screenshot](./summary.jpg)
 
-Supports generated schemas. See [Example Usage](#example-usage).
+See [Example Usage](#example-usage) for generated schemas.
 
 ## Inputs
 
@@ -90,7 +90,6 @@ jobs:
 ```
 
 This is an example for an API written in Node but the same idea works for any language or framework as long as you can start the server in your workflow.
-
  
 __
 
