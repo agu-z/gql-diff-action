@@ -89,6 +89,7 @@ jobs:
 
 ```
 
+This is an example for an API written in Node but the same idea works for any language or framework as long as you can start the server in your workflow. 
 __
 
 This action uses [`graphql-schema-diff`](https://github.com/fabsrc/graphql-schema-diff). Thanks [fabsrc](https://github.com/fabsrc)!
