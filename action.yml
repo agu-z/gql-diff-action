@@ -1,0 +1,15 @@
+name: 'GraphQL Diff'
+description: 'Posts a nice summary of the changes you made to your GraphQL schema in your Pull Request.'
+inputs:
+  token:
+    description: 'GitHub token to post the comment'
+    required: true
+  old-schema: 
+    description: 'Old schema location'
+    required: true
+  new-schema:
+    description: 'New schema location'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

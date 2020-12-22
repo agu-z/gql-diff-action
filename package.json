@@ -1,0 +1,31 @@
+{
+  "name": "gql-diff-action",
+  "version": "1.0.0",
+  "description": "Posts a nice summary of the changes you made to your GraphQL schema in your Pull Request.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agu-z/gql-diff-action.git"
+  },
+  "keywords": [
+    "graphql",
+    "diff",
+    "github",
+    "actions"
+  ],
+  "author": "Agustin Zubiaga <sup@aguz.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agu-z/gql-diff-action/issues"
+  },
+  "homepage": "https://github.com/agu-z/gql-diff-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "graphql": "^15.4.0",
+    "graphql-schema-diff": "^2.2.0"
+  }
+}
