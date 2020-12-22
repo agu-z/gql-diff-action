@@ -73,7 +73,7 @@ jobs:
           # Generate the old schema
           npx get-graphql-schema http://localhost:5000 ~/old-schema.gql
 
-          kill $SERVER_PID  # Stop server. This is necessary to free up the port.
+          kill $SERVER_PID  # Stop server
           
       - uses: agu-z/gql-diff-action@v0.3
         with:

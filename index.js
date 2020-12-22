@@ -35,11 +35,10 @@ ${result.diffNoColor}
 ${breaking}
 ${dangerous}
         `
-
         const kit = github.getOctokit(core.getInput("token"));
 
-        kit.issues.createComment({
-            owner: github.context.payload.repository.owner,
+        return kit.issues.createComment({
+            owner: github.context.payload.repository.owner.name,
             repo: github.context.payload.repository.name,
             issue_number: github.context.payload.pull_request.number,
             body: comment
