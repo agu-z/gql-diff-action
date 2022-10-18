@@ -3,7 +3,7 @@ const github = require("@actions/github");
 const {getDiff} = require("graphql-schema-diff");
 const path = require("path");
 
-const header = "## 🗞 GraphQL Summary"
+const header = core.getInput("header");
 
 function resolveHome(filepath) {
     if (filepath[0] === '~') {
