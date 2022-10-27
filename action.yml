@@ -13,6 +13,10 @@ inputs:
   new-schema:
     description: 'New schema location'
     required: true
+  header:
+    description: 'Header to use in the comment'
+    required: false
+    default: '## 🗞 GraphQL Summary'
 runs:
   using: 'node12'
   main: 'index.js'
