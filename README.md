@@ -22,10 +22,14 @@ The schema before the change. This can be a GraphQL SDL file or an endpoint URL.
 
 The schema after the change. This can be a GraphQL SDL file or an endpoint URL.
 
+### `header` (optional)
+
+A string to use as the header of the PR comment. Use this if you want to generate summaries for multiple schemas in the same PR.
+
 ## Example usage
 
 ```yaml
-uses: agu-z/gql-diff-action@v1
+uses: agu-z/gql-diff-action@v2
 with:
   token: '${{ secrets.GITHUB_TOKEN }}'
   old-schema: '~/old-schema.gql'
@@ -81,7 +85,7 @@ jobs:
 
           kill $SERVER_PID  # Stop server
           
-      - uses: agu-z/gql-diff-action@v1
+      - uses: agu-z/gql-diff-action@v2
         with:
           token: '${{ secrets.GITHUB_TOKEN }}'
           old-schema: '~/old-schema.gql'
@@ -95,6 +99,6 @@ __
 
 This action uses [`graphql-schema-diff`](https://github.com/fabsrc/graphql-schema-diff). Thanks [fabsrc](https://github.com/fabsrc)!
 
-Agus Zubiaga 2020
+Agus Zubiaga 2022
 
 MIT licensed
