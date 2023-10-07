@@ -14,6 +14,7 @@ function resolveHome(filepath) {
 
 const oldSchema = resolveHome(core.getInput("old-schema"));
 const newSchema = resolveHome(core.getInput("new-schema"));
+const failOnDiff = core.getInput("fail-on-diff") === "true";
 
 getDiff(oldSchema, newSchema).then(async result => {
     const {repo:{owner, repo}, payload: {pull_request: {number}}} = github.context;
@@ -71,6 +72,10 @@ ${dangerous}
                 issue_number: number,
                 body,
             });
+        }
+
+        if (failOnDiff) {
+            core.setFailed("Schema changes detected.");
         }
     } else {
         core.info("No schema changes.");

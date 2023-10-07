@@ -17,6 +17,10 @@ inputs:
     description: 'Header to use in the comment'
     required: false
     default: '## 🗞 GraphQL Summary'
+  fail-on-diff:
+    description: 'Produces an error if there is a diff'
+    required: false
+    default: false
 runs:
   using: 'node12'
   main: 'index.js'
