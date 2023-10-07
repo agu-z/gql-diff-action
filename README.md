@@ -26,6 +26,10 @@ The schema after the change. This can be a GraphQL SDL file or an endpoint URL.
 
 A string to use as the header of the PR comment. Use this if you want to generate summaries for multiple schemas in the same PR.
 
+### `fail-on-diff` (optional)
+
+Determinates if the job should fail when changes are present in the schema.
+
 ## Example usage
 
 ```yaml
@@ -34,6 +38,9 @@ with:
   token: '${{ secrets.GITHUB_TOKEN }}'
   old-schema: '~/old-schema.gql'
   new-schema: '~/new-schema.gql'
+  # Optional Configuration
+  header: '## Schema Changes Report'
+  fail-on-diff: true
 ```
 
 The way you generate old and new schema files is up to you. 
