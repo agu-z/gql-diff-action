@@ -74,7 +74,7 @@ ${dangerous}
             });
         }
 
-        if (failOnDiff) {
+        if (failOnDiff && result.breakingChanges.length > 0) {
             core.setFailed("Schema changes detected.");
         }
     } else {

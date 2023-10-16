@@ -28,7 +28,8 @@ A string to use as the header of the PR comment. Use this if you want to generat
 
 ### `fail-on-diff` (optional)
 
-Determinates if the job should fail when changes are present in the schema.
+Determinates if the job should fail when breaking changes are present in the
+schema.
 
 ## Example usage
 
